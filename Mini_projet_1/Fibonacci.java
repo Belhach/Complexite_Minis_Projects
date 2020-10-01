@@ -34,7 +34,6 @@ class Fibonacci{
         return fibonacciRecursive(n-1) + fibonacciRecursive(n-2);
     }
 
-    //methode prenant en argument la version qu'on veut lancer ou bien comparer le temps d'execution entre les deux
     public void fibonacci(int n, String version){
         if(version == "iterative"){
             System.out.println("la version iterative pour la valeur "+n+" retourne le resultat : "+fibonacciIterative(n));
