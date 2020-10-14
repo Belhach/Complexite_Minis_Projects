@@ -10,6 +10,7 @@ public class Graph {
     private int[][] matrix ;
     private ArrayList<ArrayList<Integer>> listAdj;
     private int n ;
+    private ArrayList<Integer> removedVertexes = new ArrayList<>();
 
     public Graph(int n){
         matrix= new int[n][n] ;
@@ -57,6 +58,20 @@ public class Graph {
         System.out.println("\n");
     }
 
+    public void removeVertex(Integer s){
+        if(removedVertexes.contains(s)) return ;
+        removedVertexes.add(s);
+        for(int index = 0 ;index < listAdj.size(); index++){
+            if(index != s && listAdj.get(index).contains(s)){
+                listAdj.get(index).remove(s);
+            }
+        }
+
+        for(int index = 0 ; index < n; index++){
+            matrix[index][s] = 0 ;
+        }
+    }
+
     public boolean isEmptyZone(ArrayList<Integer> x){ ///////QUESTION 1
         if(x.size() == 1) return true ;
         for(int i : x){  ///// |X| itérations
@@ -66,17 +81,25 @@ public class Graph {
                     return false ;
             }
         }
-        return true ;  ////// on en déduit que cet algorithme appartient à  θ( |X|^2 )
+        return true ;  ////// on en déduit que cet algorithme appartient à  θ( |X|*|X| ) = θ( |X|^2 )
     }
 
     public ArrayList<Integer> maximalEmptyZone(){ ////////////QUESTION 2 dans cet algorithme, le pire des cas serait
                                                   ////////////lorsque le graph ne contient aucune arête
 
+
+
         ArrayList<Integer> maximalEmptyZone = new ArrayList<>();
+
+//        if(listAdj.get(0).size() == n){
+//            maximalEmptyZone.add(0);
+//            return maximalEmptyZone ;
+//        }
+
         for(Integer index= 0 ; index < listAdj.size() ; index++){ ////// |S| itérations
 
-            if(listAdj.get(index).size() != n){
-                System.out.println(index);
+            if(listAdj.get(index).size() != n && !removedVertexes.contains(index)){
+                //System.out.println(index);
                 maximalEmptyZone.add(index);
                 if(!isEmptyZone(maximalEmptyZone))
                     maximalEmptyZone.remove(index);
@@ -87,6 +110,31 @@ public class Graph {
                                  ////On en déduit que cet algorithme appartient à θ( |S|^2 )
     }
 
+    public ArrayList<Integer> maximumEmptyZone(){
+
+
+
+        ArrayList<Integer> maximumEmptyZone = new ArrayList<>();
+        while(removedVertexes.size() != n){
+
+            ArrayList<Integer> maximalEmptyZone = this.maximalEmptyZone();
+            System.out.println(maximalEmptyZone);
+
+            if(maximalEmptyZone.size() > maximumEmptyZone.size())
+                maximumEmptyZone = (ArrayList<Integer>)maximalEmptyZone.clone();
+
+            for(int index = 0 ; index < maximalEmptyZone.size(); index++){
+
+                this.removeVertex(maximalEmptyZone.get(index));
+                this.printList();
+            }
+
+        }
+
+        return maximumEmptyZone ;
+
+    }
+
 
 
 
@@ -95,11 +143,8 @@ public class Graph {
         Graph graph = new Graph();
         graph.printList();
         graph.printMatrix();
-        ArrayList<Integer> vide = new ArrayList<>();
-        vide.add(1);
-        vide.add(2);
-        System.out.println(graph.isEmptyZone(vide));
-        System.out.println(graph.maximalEmptyZone());
+        System.out.println(graph.maximumEmptyZone());
+
 
     }
 }
