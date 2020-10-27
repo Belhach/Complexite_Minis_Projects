@@ -87,14 +87,7 @@ public class Graph {
     public ArrayList<Integer> maximalEmptyZone(){ ////////////QUESTION 2 dans cet algorithme, le pire des cas serait
                                                   ////////////lorsque le graph ne contient aucune arête
 
-
-
         ArrayList<Integer> maximalEmptyZone = new ArrayList<>();
-
-//        if(listAdj.get(0).size() == n){
-//            maximalEmptyZone.add(0);
-//            return maximalEmptyZone ;
-//        }
 
         for(Integer index= 0 ; index < listAdj.size() ; index++){ ////// |S| itérations
 
@@ -121,7 +114,7 @@ public class Graph {
             System.out.println(maximalEmptyZone);
 
             if(maximalEmptyZone.size() > maximumEmptyZone.size())
-                maximumEmptyZone = (ArrayList<Integer>)maximalEmptyZone.clone();
+                maximumEmptyZone = maximalEmptyZone;
 
             for(int index = 0 ; index < maximalEmptyZone.size(); index++){
 
@@ -136,14 +129,39 @@ public class Graph {
     }
 
 
+    public ArrayList<Integer> optimized_maximal_zone(){
+        ArrayList<Integer> maximalEmptyZone = new ArrayList<>();
+        int vertexWithMinimumEdges = 0 ;
+        for(int index = 1 ; index < n ; index++){
+            int numberVertexes = listAdj.get(index).size();
 
+            if(listAdj.get(vertexWithMinimumEdges).size() > numberVertexes)
+                vertexWithMinimumEdges = index ;
+        }
+        maximalEmptyZone.add(vertexWithMinimumEdges);
+        System.out.println(vertexWithMinimumEdges);
+        for(Integer index= 0 ; index < listAdj.size() ; index++){ ////// |S| itérations
+
+            if(listAdj.get(index).size() != n && index != vertexWithMinimumEdges){
+
+                maximalEmptyZone.add(index);
+                if(!isEmptyZone(maximalEmptyZone))
+                    maximalEmptyZone.remove(index);
+
+            }
+        }
+
+        return maximalEmptyZone ;
+    }
 
 
     public static void main(String[] args) throws IOException {
         Graph graph = new Graph();
         graph.printList();
         graph.printMatrix();
-        System.out.println(graph.maximumEmptyZone());
+        //System.out.println(graph.maximumEmptyZone());
+        //System.out.println(graph.optimized_maximal_zone());
+        System.out.println(graph.maximalEmptyZone());
 
 
     }
