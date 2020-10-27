@@ -61,15 +61,15 @@ public class Graph {
     public void removeVertex(Integer s){
         if(removedVertexes.contains(s)) return ;
         removedVertexes.add(s);
-        for(int index = 0 ;index < listAdj.size(); index++){
-            if(index != s && listAdj.get(index).contains(s)){
-                listAdj.get(index).remove(s);
-            }
-        }
-
-        for(int index = 0 ; index < n; index++){
-            matrix[index][s] = 0 ;
-        }
+//        for(int index = 0 ;index < listAdj.size(); index++){
+//            if(index != s && listAdj.get(index).contains(s)){
+//                listAdj.get(index).remove(s);
+//            }
+//        }
+//
+//        for(int index = 0 ; index < n; index++){
+//            matrix[index][s] = 0 ;
+//        }
     }
 
     public boolean isEmptyZone(ArrayList<Integer> x){ ///////QUESTION 1
@@ -91,8 +91,8 @@ public class Graph {
 
         for(Integer index= 0 ; index < listAdj.size() ; index++){ ////// |S| itérations
 
-            if(listAdj.get(index).size() != n && !removedVertexes.contains(index)){
-                //System.out.println(index);
+            if( !removedVertexes.contains(index)){
+
                 maximalEmptyZone.add(index);
                 if(!isEmptyZone(maximalEmptyZone))
                     maximalEmptyZone.remove(index);
@@ -111,7 +111,7 @@ public class Graph {
         while(removedVertexes.size() != n){
 
             ArrayList<Integer> maximalEmptyZone = this.maximalEmptyZone();
-            System.out.println(maximalEmptyZone);
+
 
             if(maximalEmptyZone.size() > maximumEmptyZone.size())
                 maximumEmptyZone = maximalEmptyZone;
@@ -119,10 +119,12 @@ public class Graph {
             for(int index = 0 ; index < maximalEmptyZone.size(); index++){
 
                 this.removeVertex(maximalEmptyZone.get(index));
-                this.printList();
+
             }
 
         }
+
+        removedVertexes = new ArrayList<>();
 
         return maximumEmptyZone ;
 
@@ -138,8 +140,9 @@ public class Graph {
             if(listAdj.get(vertexWithMinimumEdges).size() > numberVertexes)
                 vertexWithMinimumEdges = index ;
         }
+
         maximalEmptyZone.add(vertexWithMinimumEdges);
-        System.out.println(vertexWithMinimumEdges);
+
         for(Integer index= 0 ; index < listAdj.size() ; index++){ ////// |S| itérations
 
             if(listAdj.get(index).size() != n && index != vertexWithMinimumEdges){
@@ -159,8 +162,8 @@ public class Graph {
         Graph graph = new Graph();
         graph.printList();
         graph.printMatrix();
-        //System.out.println(graph.maximumEmptyZone());
-        //System.out.println(graph.optimized_maximal_zone());
+        System.out.println(graph.maximumEmptyZone());
+        System.out.println(graph.optimized_maximal_zone());
         System.out.println(graph.maximalEmptyZone());
 
 
