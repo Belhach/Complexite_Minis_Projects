@@ -60,6 +60,7 @@ public class TuringMachine {
         System.out.println(t.inputAlphabet);
         System.out.println(t.outputAlphabet);
         t.print();
+        System.out.println("a");
 
     }
 }
