@@ -10,17 +10,30 @@ public class TuringMachine {
     private ArrayList<State> states ;
     private char[] inputAlphabet ;
     private char[] outputAlphabet ;
+    private char[] entrance ;
+    private int headLectureIsAt = 1;
+    private int currentState = 0 ;
+    private boolean done = false ;
 
 
-    public TuringMachine() throws IOException {
 
-        BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream("C:\\Users\\hak72\\IdeaProjects\\Complexite_Minis_Projects\\src\\Mini_Projet_3\\machine1")));
+    public TuringMachine(String path,String entrance) throws IOException {
+
+
+
+
+        BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(path)));
+
+        this.entrance = ("B"+entrance+"B").toCharArray();
 
         int states = Integer.valueOf(br.readLine());
         this.states = new ArrayList<>();
 
         for(int index = 0 ; index < states; index++){
-            this.states.add(new State(index));
+            if(index == states-1)
+                this.states.add(new State(index,true));
+            else
+                this.states.add(new State(index,false));
         }
 
         String[] alphabet = br.readLine().split(" ");
@@ -48,6 +61,7 @@ public class TuringMachine {
 
             this.states.get(inputState).addTransition(inputState,outputState,intputChar,outputChar,direction);
         }
+        this.states.add(new State(states,true)); // A voir
 
     }
     public void print(){
@@ -55,11 +69,21 @@ public class TuringMachine {
             state.print();
     }
 
+    public void startMachine(){
+
+        while(!done){
+
+        }
+
+
+    }
+
     public static void main(String arg[]) throws IOException {
-        TuringMachine t = new TuringMachine();
+        TuringMachine t = new TuringMachine(arg[0],arg[1]);
         System.out.println(t.inputAlphabet);
         System.out.println(t.outputAlphabet);
         t.print();
+        System.out.println(t.entrance);
 
     }
 }

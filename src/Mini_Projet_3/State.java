@@ -6,9 +6,11 @@ public class State {
 
     ArrayList<Transition> transitions ;
     int number ;
-    public State(int number ){
+    boolean done ;
+    public State(int number , boolean done ){
         transitions = new ArrayList<>();
         this.number = number ;
+        this.done = done ;
     }
 
     public void addTransition(int inputState, int outputState, char inputChar, char outputChar, char direction){
