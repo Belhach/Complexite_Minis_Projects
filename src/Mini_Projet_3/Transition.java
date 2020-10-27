@@ -19,4 +19,24 @@ public class Transition {
 
         System.out.println("( "+inputState+" , "+inputChar+") -> ( "+outputState+" , "+outputChar+" , "+ direction+ " )");
     }
+
+    public int getInputState() {
+        return inputState;
+    }
+
+    public int getOutputState() {
+        return outputState;
+    }
+
+    public char getInputChar() {
+        return inputChar;
+    }
+
+    public char getOutputChar() {
+        return outputChar;
+    }
+
+    public Direction getDirection() {
+        return direction;
+    }
 }

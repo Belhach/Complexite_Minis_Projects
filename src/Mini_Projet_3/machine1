@@ -1,5 +1,13 @@
-3
-a b c
-a b c d
-0 1 a b R
-0 2 b a L
+6
+a b
+a b
+0 1 a a R
+1 1 a a R
+1 1 b b R
+1 2 B B L
+2 3 b B L
+3 3 a a L
+3 3 b b L
+3 4 B B R
+4 5 B B R
+4 1 a B R

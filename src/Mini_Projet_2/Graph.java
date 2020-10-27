@@ -61,15 +61,7 @@ public class Graph {
     public void removeVertex(Integer s){
         if(removedVertexes.contains(s)) return ;
         removedVertexes.add(s);
-//        for(int index = 0 ;index < listAdj.size(); index++){
-//            if(index != s && listAdj.get(index).contains(s)){
-//                listAdj.get(index).remove(s);
-//            }
-//        }
-//
-//        for(int index = 0 ; index < n; index++){
-//            matrix[index][s] = 0 ;
-//        }
+
     }
 
     public boolean isEmptyZone(ArrayList<Integer> x){ ///////QUESTION 1
