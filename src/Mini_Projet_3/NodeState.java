@@ -2,15 +2,20 @@ package Mini_Projet_3;
 
 import java.util.HashMap;
 
-public class State {
+enum TypeState{
+    NORMAL,
+    Q_NON,
+    Q_OUI
+}
+public class NodeState {
     HashMap<Character,Transition> transitions  ;
     int number ;
-    boolean isFinalState;
+    TypeState typeState;
 
-    public State(int number , boolean isFinalState){
+    public NodeState(int number , TypeState typeState){
         transitions = new HashMap<>();
         this.number = number ;
-        this.isFinalState = isFinalState;
+        this.typeState = typeState ;
     }
 
     public void addTransition(int inputState, int outputState, char inputChar, char outputChar, char direction){
@@ -33,7 +38,7 @@ public class State {
     public String toString() {
         StringBuilder s = new StringBuilder();
         s.append("finale = ")
-                .append(isFinalState)
+                .append(typeState)
                 .append("(Q")
                 .append(number)
                 .append(")").append("\n");

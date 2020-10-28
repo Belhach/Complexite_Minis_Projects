@@ -8,21 +8,16 @@ import java.util.ArrayList;
 
 public class TuringMachine {
     public static int MAX_STATE_NUMBER;
-    private final ArrayList<State> states;
+    private final ArrayList<NodeState> nodeStates;
     private final char[] inputAlphabet;
     private final char[] outputAlphabet;
     private final char[] band;
-    private int headLectureIsAt = 1;
-    private int currentState = 0;
-    private boolean done = false;
+    private TypeState typeState;
 
     public TuringMachine(String path, String word) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(path)));
         this.band = constructBand(word);
         MAX_STATE_NUMBER = Integer.parseInt(br.readLine());
-
-
-        initStates();
 
         String[] alphabet = br.readLine().split(" ");
         inputAlphabet = initAlphabet(alphabet);
@@ -30,8 +25,13 @@ public class TuringMachine {
         alphabet = br.readLine().split(" ");
         outputAlphabet = initAlphabet(alphabet);
 
-        this.states = new ArrayList<>();
+        String[] qOuiAndQNonIndexes = br.readLine().split(" ");
+        int qOuiIndex = Integer.parseInt(qOuiAndQNonIndexes[0]);
+        int qNonIndex = Integer.parseInt(qOuiAndQNonIndexes[1]);
+        this.nodeStates = new ArrayList<>();
+        initStates(qOuiIndex, qNonIndex);
         createAndAddStates(br);
+        this.typeState = this.nodeStates.get(0).typeState;
     }
 
     private void createAndAddStates(BufferedReader br) throws IOException {
@@ -46,9 +46,8 @@ public class TuringMachine {
             char outputChar = line[3].charAt(0);
             char direction = line[4].charAt(0);
 
-            this.states.get(inputState).addTransition(inputState, outputState, inputChar, outputChar, direction);
+            this.nodeStates.get(inputState).addTransition(inputState, outputState, inputChar, outputChar, direction);
         }
-        states.add(new State(-1, true));
     }
 
     private char[] initAlphabet(String[] alphabet) {
@@ -61,15 +60,16 @@ public class TuringMachine {
         return inputAlphabet;
     }
 
-    private void initStates() {
+    private void initStates(int qOuiIndex, int qNonIndex) {
         for (int index = 0; index < MAX_STATE_NUMBER; index++) {
-            if (index == MAX_STATE_NUMBER - 1)
-                this.states.add(new State(index, true));
-            else
-                this.states.add(new State(index, false));
+            if (index == qOuiIndex) {
+                this.nodeStates.add(new NodeState(index, TypeState.Q_OUI));
+            } else if (index == qNonIndex) {
+                this.nodeStates.add(new NodeState(index, TypeState.Q_NON));
+            } else {
+                this.nodeStates.add(new NodeState(index, TypeState.NORMAL));
+            }
         }
-
-        this.states.add(new State(MAX_STATE_NUMBER, true));
     }
 
 
@@ -78,15 +78,15 @@ public class TuringMachine {
     }
 
     public void print() {
-        for (State state : states)
-            state.print();
+        for (NodeState nodeState : nodeStates)
+            nodeState.print();
     }
 
     @Override
     public String toString() {
         StringBuilder s = new StringBuilder();
-        for(State state : states){
-            s.append(state);
+        for (NodeState nodeState : nodeStates) {
+            s.append(nodeState);
         }
         return new String(s);
     }
@@ -96,7 +96,7 @@ public class TuringMachine {
             System.out.print(character + "|");
         }
 
-        System.out.println(" current state : " + states.get(currentState).number);
+        System.out.println(" current state : " + nodeStates.get(currentState).number);
 
         for (int index = 0; index < band.length; index++) {
             if (headLectureIsAt == index) System.out.print("^");
@@ -105,18 +105,20 @@ public class TuringMachine {
         System.out.println(" ");
     }
 
+    private int headLectureIsAt = 1;
+    private int currentState = 0;
+
     public boolean startMachine() {
-        while (!done || currentState == -1) {
+        while (typeState == TypeState.NORMAL) {
             printRuban();
-            Transition transition = states.get(currentState).switchState(band[headLectureIsAt]);
+            Transition transition = nodeStates.get(currentState).switchState(band[headLectureIsAt]);
             currentState = transition.getOutputState();
-            done = states.get(currentState).isFinalState;
+            typeState = nodeStates.get(currentState).typeState;
             band[headLectureIsAt] = transition.getOutputChar();
             headLectureIsAt = transition.getDirection() == Direction.RIGHT ? headLectureIsAt + 1 : headLectureIsAt - 1;
         }
 
-        printRuban();
-        return currentState == MAX_STATE_NUMBER;
+        return typeState == TypeState.Q_OUI;
     }
 
     public static void main(String[] args) throws IOException {
