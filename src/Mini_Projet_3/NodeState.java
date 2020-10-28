@@ -16,6 +16,10 @@ public class NodeState {
         transitions = new HashMap<>();
         this.number = number ;
         this.typeState = typeState ; // lool
+        //azezadza
+        //azdzdazd
+        //azdzdzadaz
+        //adzdazdazdaz
     }
     // tteeeeeeeeeeeeeeestt
     public void addTransition(int inputState, int outputState, char inputChar, char outputChar, char direction){
