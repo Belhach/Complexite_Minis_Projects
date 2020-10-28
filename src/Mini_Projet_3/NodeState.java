@@ -17,14 +17,9 @@ public class NodeState {
         this.number = number ;
         this.typeState = typeState ;
     }
-
+    // tteeeeeeeeeeeeeeestt
     public void addTransition(int inputState, int outputState, char inputChar, char outputChar, char direction){
         transitions.put(inputChar,new Transition(inputState,outputState,inputChar,outputChar,direction));
-    }
-
-    public void print(){
-        for(Character c : transitions.keySet())
-            transitions.get(c).print();
     }
 
     public Transition switchState(char character){

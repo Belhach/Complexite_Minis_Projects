@@ -21,10 +21,6 @@ public class Transition {
         this.direction = direction == 'R' ? Direction.RIGHT : Direction.LEFT ;
     }
 
-    public void print(){
-
-        System.out.println("( "+inputState+" , "+inputChar+") -> ( "+outputState+" , "+outputChar+" , "+ direction+ " )");
-    }
 
     public int getInputState() {
         return inputState;

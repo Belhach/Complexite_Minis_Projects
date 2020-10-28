@@ -72,14 +72,8 @@ public class TuringMachine {
         }
     }
 
-
     private char[] constructBand(String word) {
         return ("B" + word + "B").toCharArray();
-    }
-
-    public void print() {
-        for (NodeState nodeState : nodeStates)
-            nodeState.print();
     }
 
     @Override
