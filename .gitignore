@@ -1,0 +1,7 @@
+.idea
+.idea/libraries/*.*
+.idea/production/**
+.idea/*.xml
+*.iml
+
+*.class
