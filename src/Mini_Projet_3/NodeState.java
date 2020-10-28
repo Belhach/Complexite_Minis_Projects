@@ -15,7 +15,7 @@ public class NodeState {
     public NodeState(int number , TypeState typeState){
         transitions = new HashMap<>();
         this.number = number ;
-        this.typeState = typeState ;
+        this.typeState = typeState ; // lool
     }
 
     public void addTransition(int inputState, int outputState, char inputChar, char outputChar, char direction){
