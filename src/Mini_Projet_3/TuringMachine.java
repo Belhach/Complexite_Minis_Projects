@@ -27,7 +27,7 @@ public class TuringMachine {
     private char[] inputAlphabet ;
     private char[] outputAlphabet ;
 
-
+    // ceci est un com
     public TuringMachine() throws IOException {
 
         BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream("C:\\Users\\hak72\\IdeaProjects\\Complexite_Minis_Projects\\src\\Mini_Projet_3\\machine1")));
