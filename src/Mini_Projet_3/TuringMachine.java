@@ -55,12 +55,12 @@ public class TuringMachine {
 
         String readLine ;
         while((readLine = br.readLine())!= null){
-            String[] line = readLine.split(" ");
-            int inputState = Integer.valueOf(line[0]);
-            int outputState = Integer.valueOf(line[1]);
-            char intputChar = line[2].charAt(0);
-            char outputChar = line[3].charAt(0);
-            char direction = line[4].charAt(0);
+            String[] cell = readLine.split(" ");
+            int inputState = Integer.valueOf(cell[0]);
+            int outputState = Integer.valueOf(cell[1]);
+            char intputChar = cell[2].charAt(0);
+            char outputChar = cell[3].charAt(0);
+            char direction = cell[4].charAt(0);
 
             this.states.get(inputState).addTransition(inputState,outputState,intputChar,outputChar,direction);
         }
