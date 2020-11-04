@@ -1,5 +1,21 @@
 package Mini_Projet_3;
 
+/*****************************************************************************************************************************************************************************
+*    ____            ____     _     __          _     _         ______     _________       ________              _     _____________    _______________     _____________    *
+*   | |\ \          / /| |   | |   | \ \       | |   | |       |  ___ \    |  _____ |     / ______ \            | |   |  ___________|  |______   ______|   |___________  |   *
+*   | | \ \        / / | |   | |   | |\ \      | |   | |       | |   \ \   | |    / /    / /      \ \           | |   | |                     | |                     |  |   *
+*   | |  \ \      / /  | |   | |   | | \ \     | |   | |       | |   / /   | |   / /    / /        \ \          | |   | |                     | |                     |  |   *
+*   | |   \ \    / /   | |   | |   | |  \ \    | |   | |       | |  / /    | |__/ /    / /          \ \         | |   | |___________          | |           __________|  |   *
+*   | |    \ \  / /    | |   | |   | |   \ \   | |   | |       | |_/ /     |  _  /    / /            \ \   __   | |   |  ___________|         | |          |___________  |   *
+*   | |     \ \/ /     | |   | |   | |    \ \  | |   | |       |  __/      | | \ \    \ \            / /   \ \  | |   | |                     | |                     |  |   *
+*   | |      \__/      | |   | |   | |     \ \ | |   | |       | |         | |  \ \    \ \          / /     \ \ | |   | |                     | |                     |  |   *
+*   | |                | |   | |   | |      \ \| |   | |       | |         | |   \ \    \ \________/ /       \ \| |   | |___________          | |           __________|  |   *
+*   |_|                |_|   |_|   |_|       \_ _|   |_|       |_|         |_|    \_\    \__________/         \___|   |_____________|         |_|          |_____________|   *
+*                                                                                                                                                                            *
+*****************************************************************************************************************************************************************************/
+
+
+
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -18,6 +34,7 @@ public class TuringMachine {
         BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(path)));
         this.band = constructBand(word);
         MAX_STATE_NUMBER = Integer.parseInt(br.readLine());
+
 
         String[] alphabet = br.readLine().split(" ");
         inputAlphabet = initAlphabet(alphabet);
@@ -38,7 +55,6 @@ public class TuringMachine {
         String readLine;
         while ((readLine = br.readLine()) != null) {
             String[] line = readLine.split(" ");
-
             int inputState = Integer.parseInt(line[0]);
             int outputState = Integer.parseInt(line[1]);
 
@@ -71,6 +87,7 @@ public class TuringMachine {
             }
         }
     }
+
 
     private char[] constructBand(String word) {
         return ("B" + word + "B").toCharArray();
@@ -122,5 +139,6 @@ public class TuringMachine {
         System.out.println(t);
         System.out.println(t.band);
         System.out.println(t.startMachine());
+
     }
 }
