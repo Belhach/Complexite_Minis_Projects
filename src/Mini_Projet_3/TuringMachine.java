@@ -30,7 +30,7 @@ public class TuringMachine {
     // ceci est un com
     public TuringMachine() throws IOException {
 
-        BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream("C:\\Users\\hak72\\IdeaProjects\\Complexite_Minis_Projects\\src\\Mini_Projet_3\\machine1")));
+        BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream("/Users/mhamedbelhachemi/Desktop/Home/amu/M1/S1/Complexité/Complexite_Minis_Projects/src/Mini_Projet_3/machine1")));
 
         int states = Integer.valueOf(br.readLine());
         this.states = new ArrayList<>();

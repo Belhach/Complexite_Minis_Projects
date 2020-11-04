@@ -33,7 +33,7 @@ public class Graph {
 
     private Graph() throws IOException { // Le constructeur consiste à lire le fichier puis implémente les données du graph sous
                                         // forme matrices ainsi que sous forme d'adjascence
-        BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream("C:\\Users\\hak72\\IdeaProjects\\Complexite_Minis_Projects\\src\\Mini_Projet_2\\matrix")));
+        BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream("/Users/mhamedbelhachemi/Desktop/Home/amu/M1/S1/Complexité/Complexite_Minis_Projects/src/Mini_Projet_2/matrix")));
 
         n =Integer.valueOf( br.readLine());
         matrix = new int[n][n];
