@@ -1,0 +1,10 @@
+.idea
+.idea/libraries/*.xml
+.idea/production/**
+.idea/vcs.xml
+.idea/modules.xml
+.idea/misc.xml
+.idea/*.iml
+*.iml
+
+*.class
