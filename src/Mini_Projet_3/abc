@@ -1,15 +1,19 @@
-4
+5
 a b c d
 a b c d
+3 4
 0 0 b b R
 0 0 c c R
 0 0 d d R
 0 1 a a R
+0 4 B B R
 1 0 c c R
 1 0 d d R
 1 1 a a R
 1 2 b b R
+1 4 B B R
 2 0 b b R
 2 0 d d R
 2 1 a a R
 2 3 c c R
+2 4 B B R
